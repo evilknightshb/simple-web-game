@@ -1390,7 +1390,7 @@ const MAP_STRATEGIES = {
   loot:  { name: '贪掉落', desc: '优先精英、宝库与奇遇',         score: { elite: 5, treasure: 4, event: 3, fight: 2, shop: 1, camp: 1 } },
   gold:  { name: '贪资源', desc: '优先宝库、商人与奇遇',         score: { treasure: 5, shop: 4, event: 4, fight: 2, elite: 2, camp: 1 } }
 };
-const MAP_DEFAULT_STRATEGY = 'loot';
+const MAP_DEFAULT_STRATEGY = 'safe';
 
 /* 远征托管（N-5）：战斗中获得的金币 / 裂隙尘 / 结晶先进「远征携带」，经验与装备即时到手。
  * 只有推进最高层时才进携带；回头刷旧层直接到账。全额结算：进营地节点、击败层域 Boss、击败裂隙之主、轮回。 */
@@ -1565,7 +1565,7 @@ function createNewState() {
 
     equipment: emptyEquipment(),
     inventory: [],
-    autoEquip: false,
+    autoEquip: true,
     selectedItemId: null,
 
     pityDrop: 0,
@@ -1578,7 +1578,7 @@ function createNewState() {
     },
 
     speed: 1,
-    autoAlloc: false,
+    autoAlloc: true,
     autoNext: false,
     autoSweepOnDeath: false,
     autoRetreat: false,           /* 低血自动撤退（N-5） */
@@ -1669,7 +1669,7 @@ function createNewState() {
 
     stats: { kills: 0, drops: 0, deaths: 0, bosses: 0 },
     /* 层域地图（engine/map.js）：seeds 每个层域的生成种子，path 层数 → 走过的节点序号，next 玩家预选的下一步 */
-    map: { seeds: {}, path: {}, next: {}, strategy: 'loot' },
+    map: { seeds: {}, path: {}, next: {}, strategy: 'safe' },
     /* 远征携带（N-5）：战斗中获得、尚未结算的资源 */
     exped: { gold: 0, dust: 0, crystal: 0 },
     nodeType: null,               /* 当前层的节点类型（瞬态，进层时由地图模块设置） */
@@ -4684,7 +4684,7 @@ function rebirth() {
   const gained = marksPreview();
   const keep = {
     dust: state.dust, crystal: state.crystal, protect: state.protect, potions: state.potions, scrolls: state.scrolls,
-    stats: state.stats, achv: Object.assign({}, state.achv, { runDeaths: 0, runRetreats: 0, endlessStreak: 0, runUntracked: false }), map: { seeds: {}, path: {}, next: {}, strategy: (state.map && state.map.strategy) || 'loot' }, talents: state.talents, marks: (state.marks || 0) + gained, rebirths: (state.rebirths || 0) + 1,
+    stats: state.stats, achv: Object.assign({}, state.achv, { runDeaths: 0, runRetreats: 0, endlessStreak: 0, runUntracked: false }), map: { seeds: {}, path: {}, next: {}, strategy: (state.map && state.map.strategy) || 'safe' }, talents: state.talents, marks: (state.marks || 0) + gained, rebirths: (state.rebirths || 0) + 1,
     endlessBest: state.endlessBest, endlessBestTicks: state.endlessBestTicks, endlessBestAt: state.endlessBestAt, finalBossBestMs: state.finalBossBestMs, finalBossKills: state.finalBossKills,
     bestSpeedrunTicks: state.bestSpeedrunTicks,
     autoAlloc: state.autoAlloc, autoEquip: state.autoEquip, autoNext: state.autoNext, autoSalvage: state.autoSalvage,
