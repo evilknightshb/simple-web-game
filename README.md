@@ -9,8 +9,8 @@
 
 ## 项目文件说明
 - index.html：游戏主页面
-- style.css：样式文件
-- bg.png：游戏图片资源
+- css：样式文件
+- png：游戏图片资源
 
 ## 开源协议
 代码采用 MIT License
