@@ -44,23 +44,8 @@ window.addEventListener('error', function (e) {
     <div class="titleBtns">
       <button id="btnContinue" style="display:none">继 续 游 戏</button>
       <button id="btnEnterGame">开 始 游 戏</button>
-      <button id="btnRestoreTitle" class="small" style="align-self:center">用存档码恢复</button>
     </div>
     <div class="saveHint" id="saveHint"></div>
-  </div>
-</div>
-
-<!-- ==================== 存档码弹窗 ==================== -->
-<div id="codeModal" class="modal" style="display:none">
-  <div class="modalBox">
-    <h2 id="codeModalTitle">你的存档码</h2>
-    <div class="codeBig" id="codeText">XXXX-XXXX</div>
-    <p class="codeTip">请<b>截图保存</b>这个存档码。换手机、换浏览器或清了浏览器数据后，在开始界面点「用存档码恢复」输入它即可找回进度。游戏会每 10 秒自动把存档同步到云端。</p>
-    <div class="idRow" id="codeIdRow"><label>游戏 ID <input id="codeIdInput" maxlength="12" placeholder="2～12 字，用于排行榜"></label><span class="idHint">可跳过，之后在「系统」里改</span></div>
-    <div class="titleBtns">
-      <button id="btnCopyCodeModal">复制存档码</button>
-      <button id="btnCodeConfirm" class="gold">我已截图，开始游戏</button>
-    </div>
   </div>
 </div>
 
@@ -169,9 +154,8 @@ window.addEventListener('error', function (e) {
           <button class="moreItem" data-panel="pnlMaterials" data-title="材料与消耗品"><span class="ico">💎</span><span class="txt">材料与消耗品 <i>结晶 · 保护券 · 药剂 · 卷轴</i></span><span class="go">›</span></button>
           <button class="moreItem" data-panel="pnlMap" data-title="层域地图"><span class="ico">🗺️</span><span class="txt">层域地图 <i>路线 · 改道 · 挂机策略</i></span><span class="go">›</span></button>
           <button class="moreItem" data-panel="pnlGoals" data-title="目标与成就"><span class="ico">🎯</span><span class="txt">目标与成就 <i>目标链 · 挑战 · 最快记录</i></span><span class="go">›</span></button>
-          <button class="moreItem" data-panel="pnlRank" data-title="排行榜"><span class="ico">🏆</span><span class="txt">排行榜 <i>速通榜 · 无尽榜</i></span><span class="go">›</span></button>
           <button class="moreItem" data-panel="pnlRebirth" data-title="无尽与轮回"><span class="ico">♻️</span><span class="txt">无尽与轮回 <i>无尽纪录 · 裂隙印记 · 永久天赋</i></span><span class="go">›</span></button>
-          <button class="moreItem" data-panel="pnlSystem" data-title="系统"><span class="ico">⚙️</span><span class="txt">系统 <i>存档 · 存档码 · 音效 · 引导</i></span><span class="go">›</span></button>
+          <button class="moreItem" data-panel="pnlSystem" data-title="系统"><span class="ico">⚙️</span><span class="txt">系统 <i>存档 · 音效 · 引导</i></span><span class="go">›</span></button>
         </div>
       </section>
 
@@ -374,7 +358,6 @@ window.addEventListener('error', function (e) {
         <button data-panel="pnlMaterials">💎 材料</button>
         <button data-panel="pnlMap">🗺️ 地图</button>
         <button data-panel="pnlGoals">🎯 目标</button>
-        <button data-panel="pnlRank">🏆 排行</button>
         <button data-panel="pnlRebirth">♻️ 轮回</button>
         <button data-panel="pnlSystem">⚙️ 系统</button>
       </div>
@@ -409,16 +392,6 @@ window.addEventListener('error', function (e) {
         </div>
         <div class="goalBody" id="goalBody"></div>
       </section>
-      <section class="panel" id="pnlRank">
-        <h2>排行榜 <span class="hint"><button class="small" id="btnRankRefresh">刷新</button></span></h2>
-        <div class="segs" id="rankSegs">
-          <button data-rank="speedrun" class="active">⏱ 速通榜</button>
-          <button data-rank="endless">🌑 无尽榜</button>
-        </div>
-        <div class="rankNote" id="rankNote"></div>
-        <div class="rankList" id="rankList"><div class="emptyDetail">加载中…</div></div>
-        <div class="rankMe" id="rankMe"></div>
-      </section>
       <section class="panel" id="pnlRebirth">
         <h2>无尽与轮回 <span class="hint" id="uiRebirthHint">通关后解锁</span></h2>
         <div class="rebirthTop">
@@ -444,14 +417,6 @@ window.addEventListener('error', function (e) {
           <button class="small" id="btnSfx">🔊 音效开</button>
         </div>
         <div class="sysStatus" id="uiSaveStatus">尚未保存</div>
-        <div class="sysStatus" style="margin-top:10px">游戏 ID <b id="uiPlayerId" class="codeInline">—</b> <button class="small" id="btnChangeId">修改</button></div>
-        <div class="sysStatus" style="margin-top:6px">存档码 <b id="uiCloudCode" class="codeInline">—</b></div>
-        <div class="sysRow" style="margin-top:6px">
-          <button class="small" id="btnCopyCode">复制存档码</button>
-          <button class="small" id="btnRestoreCode">用存档码恢复</button>
-          <button class="small" id="btnCloudPush">立即同步</button>
-        </div>
-        <div class="sysStatus" id="uiCloudStatus">云同步：等待首次保存</div>
         <div class="credits">美术素材：<a href="https://0x72.itch.io/dungeontileset-ii" target="_blank" rel="noopener">0x72 DungeonTilesetII</a> · <a href="https://kenney.nl/assets/tiny-dungeon" target="_blank" rel="noopener">Kenney Tiny Dungeon</a> · <a href="https://kenney.nl/assets/1-bit-pack" target="_blank" rel="noopener">Kenney 1-Bit Pack</a> · <a href="https://kenney.nl/assets/game-icons" target="_blank" rel="noopener">Kenney Game Icons</a>（均 CC0）</div>
       </section>
     </div>
@@ -920,7 +885,7 @@ const AFFIX_DEFS = {
 
   /* ---------- 收益相关 ---------- */
   luck:      { name: '幸运',       type: 'flat', base: 1,     perTier: 1.2,
-               desc: '影响掉落金币等判定，每点幸运额外提升 2% 金币获取' },
+               desc: '影响金币获取，每点额外提升 2% 金币；并按幸运加点比例提升暴击、暴击伤害与吸血' },
   goldBonus: { name: '金币获取',   type: 'pct',  base: 0.020, perTier: 0.008,
                desc: '提升击杀怪物获得的金币数量（上限 350%）' },
   expBonus:  { name: '经验获取',   type: 'pct',  base: 0.020, perTier: 0.008,
@@ -1683,15 +1648,13 @@ function createNewState() {
     /* 无尽与轮回 */
     endlessBest: 0,               /* 到达过的最高无尽层（> 100） */
     endlessBestTicks: 0,          /* 到达最高无尽层时的本轮累计 tick */
-    endlessBestAt: 0,             /* 清过最高无尽层的真实时刻（ms 时间戳），排行榜显示「何时达成」 */
+    endlessBestAt: 0,             /* 清过最高无尽层的真实时刻（ms 时间戳），纪录显示「何时达成」 */
 
-    /* 游戏 ID 与速通计时（按逻辑 tick，不受速度倍率与离线补算影响） */
-    playerId: '',
-    idChangeDay: '', idChangeCount: 0,
+    /* 速通计时（按逻辑 tick，不受速度倍率与离线补算影响） */
     runTicks: 0,                  /* 本轮回累计战斗 tick */
-    speedrunEligible: true,       /* 老存档升级后 false：首次通关不上速通榜 */
+    speedrunEligible: true,       /* 老存档升级后 false：首次通关不记速通 */
     speedrunTicks: 0,             /* 本轮回首次通关用时（tick） */
-    speedrunLevel: 0,             /* 首次通关时的等级（速通榜显示用） */
+    speedrunLevel: 0,             /* 首次通关时的等级（纪录显示用） */
     bestSpeedrunTicks: 0,         /* 历史最佳 */
     marks: 0,                     /* 裂隙印记 */
     rebirths: 0,
@@ -1943,16 +1906,23 @@ function getPlayerStats() {
     if (flat[key] !== undefined) flat[key] += SB.stats[key];
     else if (pct[key] !== undefined) pct[key] += SB.stats[key];
   }
+    /* 装备 / 强化 / 套装来源的幸运：与加点幸运同规则折算成暴击、暴伤、吸血。
+     注意只折算 flat.luck，a.luk 已经在下面各项里算过了，不能再重复加。 */
+  const luckFlat = flat.luck;
+  const luckCrit = luckFlat * A.luk.crit;
+  const luckCritDmg = luckFlat * A.luk.critDmg;
+  const luckLifesteal = luckFlat * A.luk.lifesteal;
+  
 
   const stats = {
     maxHp:     Math.floor(B.hp + a.con * A.con.hp + flat.maxHp),
     atk:       B.atk + a.str * A.str.atk + flat.atk,
     def:       B.def + a.con * A.con.def + flat.def,
     atkSpeed:  B.atkSpeed + a.agi * A.agi.atkSpeed + flat.atkSpeed,
-    crit:      B.crit + a.agi * A.agi.crit + a.luk * A.luk.crit + flat.crit,
-    critDmg:   B.critDmg + a.luk * A.luk.critDmg + flat.critDmg,
+    crit:      B.crit + a.agi * A.agi.crit + a.luk * A.luk.crit + flat.crit + luckCrit,
+    critDmg:   B.critDmg + a.luk * A.luk.critDmg + flat.critDmg + luckCritDmg,
     dodge:     B.dodge + a.agi * A.agi.dodge + flat.dodge,
-    lifesteal: B.lifesteal + a.luk * A.luk.lifesteal + flat.lifesteal,
+    lifesteal: B.lifesteal + a.luk * A.luk.lifesteal + flat.lifesteal + luckLifesteal,
     luck:      B.luck + a.luk * A.luk.luck + flat.luck,
 
     atkPct:    pct.atkPct, hpPct: pct.hpPct, defPct: pct.defPct,
@@ -3948,9 +3918,8 @@ function onFinalClear(firstClear, isRecord) {
       state.speedrunLevel = state.level;   /* 记录通关时等级 */
       if (!state.bestSpeedrunTicks || state.speedrunTicks < state.bestSpeedrunTicks) state.bestSpeedrunTicks = state.speedrunTicks;
       addLog(`⏱ 速通用时：${fmtDuration(state.speedrunTicks * CONFIG.tickMs)}（游戏时间）`, 'clear');
-      emit('rankDirty', { reason: 'speedrun' });
     } else if (!state.speedrunEligible) {
-      addLog('ℹ️ 这份存档来自速通计时上线之前，本次通关不计入速通榜；轮回后重新开始计时即可参与。', 'info');
+      addLog('ℹ️ 这份存档来自速通计时上线之前，本次通关不计入最快讨伐纪录；轮回后重新开始计时即可记录。', 'info');
     }
   }
   if (state.maxFloor <= CONFIG.maxFloor) {
@@ -4016,7 +3985,42 @@ function onPlayerDeath(bossMonster) {
     startAutoSweep();
   }
 
+  deathGuidance(diedFloor);
   requestRender();
+}
+
+/* 死亡引导：把最常见的「为什么打不过」原因写进日志；三项全部命中且未触发死亡自动扫荡时，弹出一键退回弹层 */
+function deathGuidance(diedFloor) {
+  const noPoints = (state.points || 0) > 0;
+  const noRuneSkills = SKILL_KEYS.filter(k => skillUnlocked(k) && (state.runes[k] === undefined ? -1 : state.runes[k]) < 0).map(k => SKILL_DEFS[k].name);
+  const strat = mapStrategyKey();
+  const notSafe = strat !== 'safe';
+  if (noPoints) addLog(`⚠️ 你还有 ${state.points} 点属性点没有分配——先在角色面板加满再战。`, 'info');
+  if (noRuneSkills.length) addLog(`⚠️ 技能【${noRuneSkills.join('、')}】已解锁但还没装符文——符文加成很大，建议去技能面板激活。`, 'info');
+  if (notSafe) addLog(`⚠️ 当前地图策略是「${MAP_STRATEGIES[strat].name}」，打不过时可在地图面板换成「稳妥」，多打营地、少碰精英。`, 'info');
+
+  if (!noPoints || !noRuneSkills.length || !notSafe) return;   /* 三项没有全部命中：只给日志提示 */
+  if (state.autoSweepActive) return;                            /* 死亡自动扫荡已接管，不弹窗 */
+  const target = Math.max(1, Math.min(state.maxFloor || 1, diedFloor - 1));
+  if (target >= diedFloor) return;                              /* 第 1 层战败：没有可退的层 */
+  openSheet('confirm', '战败返场建议', `
+    <div class="sheetDesc">这一层先放一放。按日志里的提示补完属性点和符文后，从更稳的层数重新积累——装备、药剂与金币都会保留。</div>
+    <div class="detailBtns"><button class="gold" data-act="death-retreat" data-floor="${target}">⚔️ 一键退回第 ${target} 层开始刷</button><button data-act="death-stay">再想想</button></div>`);
+}
+
+/* 「一键退回」：回到目标层、顺手关掉自动下一层，立即开战 */
+function deathRetreatGo(floor) {
+  state.floor = Math.max(1, floor);
+  if (state.autoNext) {
+    state.autoNext = false;
+    addLog('🤖 已暂停自动下一层，方便你手动控制节奏。', 'info');
+  }
+  addLog(`⚔️ 返回第 ${state.floor} 层重新开始。`, 'info');
+  const chk = el('uiAutoNext'), tgl = el('autoNextToggle');
+  if (chk) chk.checked = false;
+  if (tgl) tgl.classList.remove('on');
+  requestRender();
+  startBattle();
 }
 
 function clearBattleBuffs() {
@@ -4068,7 +4072,6 @@ function onFloorClear(wasBoss) {
     state.endlessBest = cleared;
     state.endlessBestTicks = state.runTicks || 0;
     state.endlessBestAt = Date.now();
-    emit('rankDirty', { reason: 'endless' });
     addLog(`🌑 无尽新纪录：第 ${cleared} 层`, 'clear');
     emit('endlessRecord', { floor: cleared });
   }
@@ -4665,53 +4668,6 @@ function washPoints() {
 }
 
 
-/* ===================== 游戏 ID 与排行榜 ===================== */
-const ID_RE = /^[\u4e00-\u9fa5A-Za-z0-9_]{2,12}$/;
-const ID_BANNED = ['管理员', 'admin', 'gm', '官方', '习', '共产党', 'fuck', 'shit', '傻逼', '操你', '妈的'];
-const ID_CHANGES_PER_DAY = 3;
-function defaultPlayerId(code) { return '刷宝者' + (code ? code.slice(-4) : ''); }
-function validatePlayerId(name) {
-  const n = String(name || '').trim();
-  if (!ID_RE.test(n)) return '游戏 ID 需为 2～12 个字符，只能用中英文、数字和下划线';
-  const low = n.toLowerCase();
-  if (ID_BANNED.some(w => low.includes(w.toLowerCase()))) return '这个名字不太合适，换一个吧';
-  return null;
-}
-function idChangesLeft() {
-  const today = new Date().toISOString().slice(0, 10);
-  return state.idChangeDay === today ? Math.max(0, ID_CHANGES_PER_DAY - (state.idChangeCount || 0)) : ID_CHANGES_PER_DAY;
-}
-/* first = 新游戏时首次设定，不计入每日次数 */
-function setPlayerId(name, first) {
-  const n = String(name || '').trim();
-  const err = validatePlayerId(n);
-  if (err) { addLog('🪪 ' + err, 'info'); requestRender(); return err; }
-  if (!first) {
-    if (n === state.playerId) return null;
-    if (idChangesLeft() <= 0) { addLog(`🪪 今天的改名次数用完了（每天 ${ID_CHANGES_PER_DAY} 次）`, 'info'); requestRender(); return '今日次数已用完'; }
-    const today = new Date().toISOString().slice(0, 10);
-    if (state.idChangeDay !== today) { state.idChangeDay = today; state.idChangeCount = 0; }
-    state.idChangeCount++;
-  }
-  state.playerId = n;
-  addLog(`🪪 游戏 ID 已设为「${n}」`, 'levelup');
-  emit('rankDirty', { reason: 'id' });
-  requestRender();
-  return null;
-}
-function rankPayload() {
-  return {
-    id: state.playerId || '',
-    speedrunTicks: state.bestSpeedrunTicks || null,
-    speedrunLevel: state.speedrunLevel || state.level,   /* 速通榜显示通关时等级 */
-    bossMs: state.finalBossBestMs || 0,
-    endlessFloor: state.endlessBest || 0,
-    endlessTicks: state.endlessBestTicks || 0,
-    endlessAt: state.endlessBestAt || 0,
-    level: state.level
-  };
-}
-
 /* ===================== 轮回 ===================== */
 function marksPreview() {
   const depth = Math.max(0, (state.endlessBest || 0) - CONFIG.maxFloor);
@@ -4730,7 +4686,7 @@ function rebirth() {
     dust: state.dust, crystal: state.crystal, protect: state.protect, potions: state.potions, scrolls: state.scrolls,
     stats: state.stats, achv: Object.assign({}, state.achv, { runDeaths: 0, runRetreats: 0, endlessStreak: 0, runUntracked: false }), map: { seeds: {}, path: {}, next: {}, strategy: (state.map && state.map.strategy) || 'loot' }, talents: state.talents, marks: (state.marks || 0) + gained, rebirths: (state.rebirths || 0) + 1,
     endlessBest: state.endlessBest, endlessBestTicks: state.endlessBestTicks, endlessBestAt: state.endlessBestAt, finalBossBestMs: state.finalBossBestMs, finalBossKills: state.finalBossKills,
-    playerId: state.playerId, idChangeDay: state.idChangeDay, idChangeCount: state.idChangeCount, bestSpeedrunTicks: state.bestSpeedrunTicks,
+    bestSpeedrunTicks: state.bestSpeedrunTicks,
     autoAlloc: state.autoAlloc, autoEquip: state.autoEquip, autoNext: state.autoNext, autoSalvage: state.autoSalvage,
     autoCast: state.autoCast, runes: state.runes, autoEvents: state.autoEvents, autoSweepOnDeath: state.autoSweepOnDeath, autoRetreat: state.autoRetreat, speed: state.speed, logFilter: state.logFilter
   };
@@ -4894,20 +4850,8 @@ function startLock() {
 
 
 const SAVE_KEY = 'riftLooter.save';
-const CLOUD_CODE_KEY = 'riftLooter.cloudCode';
 const SAVE_VERSION = 2;
 const AUTOSAVE_MS = 10000;
-
-/* 存档码（云存档用）单独存，导出字符串里也带上，换设备导入时一并恢复 */
-function getCloudCode() {
-  try { return localStorage.getItem(CLOUD_CODE_KEY) || null; } catch (err) { return null; }
-}
-function setCloudCode(code) {
-  try {
-    if (code) localStorage.setItem(CLOUD_CODE_KEY, code);
-    else localStorage.removeItem(CLOUD_CODE_KEY);
-  } catch (err) { /* ignore */ }
-}
 
 /* 战斗中的临时字段，读档后一律重置 */
 function resetTransient(s) {
@@ -4984,7 +4928,7 @@ function mergeIntoFresh(saved) {
 
 function serialize() {
   const snapshot = resetTransient(JSON.parse(JSON.stringify(state)));
-  return { version: SAVE_VERSION, savedAt: Date.now(), cloudCode: getCloudCode(), state: snapshot };
+  return { version: SAVE_VERSION, savedAt: Date.now(), state: snapshot };
 }
 
 function save() {
@@ -5040,29 +4984,68 @@ function clearSave() {
   try { localStorage.removeItem(SAVE_KEY); } catch (err) { /* ignore */ }
 }
 
-/* 导出为可复制的字符串（Base64，前缀便于识别） */
-function exportString() {
-  const json = JSON.stringify(serialize());
-  const bytes = new TextEncoder().encode(json);
+/* ---------- 导出 / 导入：RIFT3 格式 ----------
+ * 导出：先剥掉战斗日志 log 与「等于新建默认值」的字段（读档时 mergeIntoFresh 会补回默认值），
+ *       再用 CompressionStream('deflate-raw') 压缩 + Base64 → RIFT3:，体积约为旧格式的 1/5～1/10。
+ * 浏览器不支持 CompressionStream 时回退 RIFT3J:（精简 JSON 直接 Base64）。两者与纯 JSON 都能导入；
+ * 旧 RIFT2: 格式已停用，导入时给出明确提示。本地自动保存不受影响（仍是完整状态）。 */
+function bytesToB64(bytes) {
   let bin = '';
   for (let i = 0; i < bytes.length; i += 8192) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192));
-  return 'RIFT2:' + btoa(bin);
+  return btoa(bin);
 }
-
-function importString(str) {
+function b64ToBytes(b64) {
+  const bin = atob(b64);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+/* 导出用的精简状态：战斗日志不导出；与新建默认值相同的字段不导出 */
+function slimStateForExport() {
+  const snapshot = resetTransient(JSON.parse(JSON.stringify(state)));
+  delete snapshot.log;   /* 战斗日志是体积大头，读档后从空日志开始 */
+  const fresh = createNewState();
+  for (const key of Object.keys(snapshot)) {
+    if (JSON.stringify(snapshot[key]) === JSON.stringify(fresh[key])) delete snapshot[key];
+  }
+  return snapshot;
+}
+async function exportString() {
+  const envelope = { version: SAVE_VERSION, savedAt: Date.now(), state: slimStateForExport() };
+  const bytes = new TextEncoder().encode(JSON.stringify(envelope));
+  if (typeof CompressionStream === 'function') {
+    try {
+      const stream = new Blob([bytes]).stream().pipeThrough(new CompressionStream('deflate-raw'));
+      const buf = await new Response(stream).arrayBuffer();
+      return 'RIFT3:' + bytesToB64(new Uint8Array(buf));
+    } catch (err) { /* 压缩不可用时走下面的 JSON 回退 */ }
+  }
+  return 'RIFT3J:' + bytesToB64(bytes);
+}
+async function importString(str) {
   let text = String(str || '').trim();
   if (!text) throw new Error('内容为空');
-  if (text.startsWith('RIFT2:')) text = text.slice(6);
-  let json;
+  if (/^RIFT2:/i.test(text)) throw new Error('旧格式存档码（RIFT2）已停用，请在游戏里重新导出新格式的存档字符串');
+  let bytes = null;
   try {
-    const bin = atob(text);
-    const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
-    json = new TextDecoder().decode(bytes);
+    if (/^RIFT3:/i.test(text)) {
+      bytes = b64ToBytes(text.slice(6).replace(/\s+/g, ''));
+      const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+      bytes = new Uint8Array(await new Response(stream).arrayBuffer());
+    } else if (/^RIFT3J:/i.test(text)) {
+      bytes = b64ToBytes(text.slice(7).replace(/\s+/g, ''));
+    } else {
+      bytes = b64ToBytes(text.replace(/\s+/g, ''));   /* 也接受不带前缀的 Base64 */
+    }
   } catch (err) {
-    json = text; /* 也接受直接粘贴的 JSON */
+    bytes = null;   /* 不是合法 Base64：按纯 JSON 处理 */
   }
-  const data = migrate(JSON.parse(json));
-  if (data.cloudCode && /^[A-Z0-9]{8}$/.test(data.cloudCode)) setCloudCode(data.cloudCode);
+  let data;
+  try {
+    data = migrate(JSON.parse(bytes ? new TextDecoder().decode(bytes) : text));
+  } catch (err) {
+    throw new Error('无法识别的存档字符串（可能已损坏或不完整）');
+  }
   applySave(data);
   save();
   return data;
@@ -5082,7 +5065,7 @@ function stopAutosave() {
   if (autosaveTimer) { clearInterval(autosaveTimer); autosaveTimer = null; }
 }
 
-/* 新游戏：重置引擎状态并清空本地存档（存档码由调用方决定是否更换） */
+/* 新游戏：重置引擎状态并清空本地存档 */
 function newGame() {
   stopAutoSweep();
   replaceState(createNewState());
@@ -5090,166 +5073,6 @@ function newGame() {
   state.playerHp = ps.maxHp;
   state.playerShield = ps.shield;
   clearSave();
-}
-
-/* ===== src/engine/cloud.js ===== */
-/* 云存档：匿名存档码 + 同源 /api 接口。本地自动保存后延迟推送，换设备用存档码取回。 */
-
-
-
-
-const API = '/api';
-const ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';   /* 去掉易混的 I L O 0 1 */
-const PUSH_DEBOUNCE_MS = 30000;   /* 本地每 10 秒存一次，云端最多 30 秒推一次；切后台 / 关页面立即推 */
-let lastPushedJson = null;         /* 上次推送的内容，没变化就不推，省流量 */
-
-let pushTimer = null;
-let pushing = false;
-let lastPushedAt = 0;
-let lastError = null;
-
-function cloudAvailable() {
-  return typeof fetch === 'function' && /^https?:$/.test(location.protocol);
-}
-
-function generateCode() {
-  const buf = new Uint8Array(8);
-  (window.crypto || window.msCrypto).getRandomValues(buf);
-  let s = '';
-  for (const b of buf) s += ALPHABET[b % ALPHABET.length];
-  return s;
-}
-
-function formatCode(code) {
-  return code ? code.slice(0, 4) + '-' + code.slice(4) : '—';
-}
-
-/* 用户输入容错：小写、空格、连字符、易混字符 */
-function normalizeCode(input) {
-  const s = String(input || '').toUpperCase().replace(/[^A-Z0-9]/g, '')
-    .replace(/O/g, '0').replace(/[IL]/g, '1');
-  /* 生成时不含 0 / 1，把它们映射回字母表里的近似字符 */
-  return s.replace(/0/g, 'Q').replace(/1/g, 'J');
-}
-
-function ensureCode() {
-  let code = getCloudCode();
-  if (!code) { code = generateCode(); setCloudCode(code); }
-  return code;
-}
-
-function cloudStatus() {
-  return { code: getCloudCode(), lastPushedAt, lastError, pushing };
-}
-
-async function request(method, path, body) {
-  const res = await fetch(API + path, {
-    method,
-    headers: body ? { 'Content-Type': 'application/json' } : undefined,
-    body: body ? JSON.stringify(body) : undefined,
-    cache: 'no-store'
-  });
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
-}
-
-async function push(force) {
-  const code = getCloudCode();
-  if (!cloudAvailable() || !code || pushing || !canWrite()) return false;
-  pushing = true;
-  try {
-    const envelope = serialize();
-    envelope.cloudCode = code;
-    /* 比对时去掉时间戳字段，内容没变就跳过 */
-    const body = JSON.stringify(Object.assign({}, envelope, { savedAt: 0 }));
-    if (!force && body === lastPushedJson) return true;
-    await request('PUT', '/save/' + code, envelope);
-    lastPushedJson = body;
-    lastPushedAt = Date.now(); lastError = null;
-    emit('cloudSynced', { at: lastPushedAt });
-    return true;
-  } catch (err) {
-    lastError = String(err.message || err);
-    emit('cloudFailed', { error: lastError });
-    return false;
-  } finally {
-    pushing = false;
-  }
-}
-
-function schedulePush() {
-  if (!cloudAvailable() || !getCloudCode()) return;
-  if (pushTimer) return;   /* 已经排了一次就等它，不重置计时（否则频繁保存会一直推后） */
-  pushTimer = setTimeout(() => { pushTimer = null; push(); }, PUSH_DEBOUNCE_MS);
-}
-
-async function pull(code) {
-  if (!cloudAvailable()) return null;
-  return request('GET', '/save/' + code);
-}
-
-/* 用存档码恢复：拉取、应用、落本地、记住存档码 */
-async function restoreFromCode(input) {
-  const code = normalizeCode(input);
-  if (code.length !== 8) throw new Error('存档码应为 8 位');
-  const data = await pull(code);
-  if (!data) throw new Error('没有找到这个存档码对应的存档');
-  setCloudCode(code);
-  applySave(data);
-  save();
-  return data;
-}
-
-/* 云端是否比本地更新（相差 5 秒以上才算） */
-async function checkCloudNewer() {
-  const code = getCloudCode();
-  if (!cloudAvailable() || !code) return null;
-  try {
-    const cloud = await pull(code);
-    const local = peek();
-    if (cloud && (!local || (cloud.savedAt || 0) > (local.savedAt || 0) + 5000)) return cloud;
-  } catch (err) { /* 网络问题时静默 */ }
-  return null;
-}
-
-/* ---------- 排行榜 ---------- */
-let rankTimer = null;
-async function pushRank() {
-  const code = getCloudCode();
-  if (!cloudAvailable() || !code || !canWrite()) return null;
-  try {
-    const res = await request('PUT', '/rank/' + code, rankPayload());
-    emit('rankPushed', res);
-    return res;
-  } catch (err) {
-    emit('cloudFailed', { error: String(err.message || err) });
-    return null;
-  }
-}
-function scheduleRankPush() {
-  if (!cloudAvailable() || !getCloudCode()) return;
-  clearTimeout(rankTimer);
-  rankTimer = setTimeout(pushRank, 1500);
-}
-async function fetchRank(kind) {
-  if (!cloudAvailable()) return null;
-  const code = getCloudCode();
-  return request('GET', '/rank/' + kind + (code ? '?me=' + code : ''));
-}
-
-function startCloudSync() {
-  if (!cloudAvailable()) return;
-  on('saved', schedulePush);
-  on('rankDirty', scheduleRankPush);
-  /* 切后台 / 关页面：立即推一次兜底（内容没变仍会跳过） */
-  const flush = () => { clearTimeout(pushTimer); pushTimer = null; push(); };
-  document.addEventListener('visibilitychange', () => { if (document.hidden) flush(); });
-  window.addEventListener('pagehide', flush);
-  /* 关键节点也立即推：通关、死亡、换层清空 */
-  for (const ev of ['finalClear', 'playerDeath', 'floorClear', 'rebirth']) on(ev, () => setTimeout(flush, 500));
-  /* 进游戏时同步一次，保证改过 ID 或纪录的老玩家上榜 */
-  if (state.playerId || state.endlessBest > 100 || state.bestSpeedrunTicks) scheduleRankPush();
 }
 
 /* ===== src/engine/goals.js ===== */
@@ -5900,6 +5723,13 @@ function ensureDom() {
 
 function openSheet(kind, title, html, data, onClose) {
   ensureDom();
+  /* 上一个弹层里可能搬进了一块面板（例如「更多 → 无尽与轮回」）。
+     先把它搬回原位，否则下面的 innerHTML 会连带把它清掉，关闭后就再也放不回去了。 */
+  if (sheetKind === 'panel' && onCloseCb) {
+    const restore = onCloseCb;
+    onCloseCb = null;
+    try { restore(); } catch (err) { /* ignore */ }
+  }
   sheetKind = kind; sheetData = data === undefined ? null : data; onCloseCb = onClose || null;
   el('sheetTitle').textContent = title || '';
   el('sheetBody').innerHTML = html || '';
@@ -7013,6 +6843,10 @@ function bindEvents() {
     const cancel = e.target.closest('#sheetBody button[data-act="rebirth-cancel"]');
     if (cancel) { closeSheet(); return; }
     if (go) { closeSheet(); if (rebirth()) { switchTabSafe('battle'); } return; }
+    const retreat = e.target.closest('#sheetBody button[data-act="death-retreat"]');
+    if (retreat) { closeSheet(); deathRetreatGo(Number(retreat.dataset.floor) || 1); return; }
+    const stay = e.target.closest('#sheetBody button[data-act="death-stay"]');
+    if (stay) { closeSheet(); return; }
     const tb = e.target.closest('button[data-talent]');
     if (tb) buyTalent(tb.dataset.talent);
   });
@@ -7023,11 +6857,11 @@ function bindEvents() {
     const btn = e.target.closest('button[data-panel]');
     if (!btn) return;
     const panel = el(btn.dataset.panel);
+    if (!panel) return;                       // ← 万一面板已经不在 DOM 里，别让整个点击处理炸掉
     const home = panel.parentNode, next = panel.nextSibling;
     openSheet('panel', btn.dataset.title, '', btn.dataset.panel, () => { home.insertBefore(panel, next); panel.classList.add('tabHidden'); });
     panel.classList.remove('tabHidden');
     el('sheetBody').appendChild(panel);
-    if (btn.dataset.panel === 'pnlRank') loadRank(false);
   });
 
   /* 自动分解设置：手机端把设置块搬进弹层，关闭时搬回背包面板 */
@@ -7040,7 +6874,6 @@ function bindEvents() {
   });
 
   el('btnSellLow').addEventListener('click', () => {
-    if (!window.confirm('分解所有战力低于已装备同槽位的装备？此操作不可撤销。')) return;
     sellLowQuality();
   });
 
@@ -8480,7 +8313,7 @@ const TAB_GROUPS = {
   gear:   ['pnlEquip', 'pnlDetail', 'pnlBag'],
   skill:  ['pnlSkills'],
   more:   ['pnlMore'],
-  _sheet: ['pnlShop', 'pnlMaterials', 'pnlMap', 'pnlGoals', 'pnlRank', 'pnlRebirth', 'pnlSystem']   /* 手机端只在弹层里出现 */
+  _sheet: ['pnlShop', 'pnlMaterials', 'pnlMap', 'pnlGoals', 'pnlRebirth', 'pnlSystem']   /* 手机端只在弹层里出现 */
 };
 let activeTab = 'battle';
 const pageScroll = {};   /* 每页记住滚动位置 */
@@ -8736,95 +8569,6 @@ function initEvents() {
   on('eventEnd', hideCard);
   on('stateReplaced', hideCard);
   on('playerDeath', hideCard);
-}
-
-/* ===== src/view/rank.js ===== */
-/* 排行榜面板：速通榜 / 无尽榜，从 /api/rank/<kind> 拉取，自己那行高亮并固定在底部 */
-
-
-
-
-
-
-
-let rankKind = 'speedrun';
-let loading = false;
-let cache = {};
-
-function scoreText(kind, r) {
-  if (kind === 'speedrun') return `${fmtDuration((r.speedrunTicks || 0) * CONFIG.tickMs)}${r.bossMs ? ` <small>· 讨伐 ${fmtDuration(r.bossMs)}</small>` : ''}`;
-  const when = r.endlessAt ? fmtWhen(r.endlessAt) + ' 达成' : '';
-  const dur = r.endlessTicks ? '用时 ' + fmtDuration(r.endlessTicks * CONFIG.tickMs) : '';
-  const sub = [when, dur].filter(Boolean).join(' · ');
-  return `第 <b>${r.endlessFloor}</b> 层${sub ? `<small class="rkSub">${sub}</small>` : ''}`;
-}
-/* 达成时刻：今年内显示「月-日 时:分」，跨年加年份 */
-function fmtWhen(ms) {
-  const d = new Date(ms), p = n => String(n).padStart(2, '0');
-  const md = `${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
-  return d.getFullYear() === new Date().getFullYear() ? md : `${d.getFullYear()}-${md}`;
-}
-function rowHtml(kind, r, mine) {
-  const medal = r.rank === 1 ? uiIcon('rank', 'gold', '🥇', 16) : r.rank === 2 ? uiIcon('rank', 'silver', '🥈', 16) : r.rank === 3 ? uiIcon('rank', 'bronze', '🥉', 16) : String(r.rank);
-  const lv = kind === 'speedrun' ? (r.speedrunLevel || r.level) : r.level;
-  return `<div class="rankRow${mine ? ' mine' : ''}">
-    <span class="rkNo">${medal}</span>
-    <span class="rkId">${escapeHtml(r.id || '刷宝者')} <small>· ${r.tail || ''}</small></span>
-    <span class="rkScore">${scoreText(kind, r)}</span>
-    <span class="rkLv">Lv.${lv || '?'}</span>
-  </div>`;
-}
-function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
-
-async function loadRank(force) {
-  const list = el('rankList');
-  if (!list) return;
-  if (!cloudAvailable()) { list.innerHTML = '<div class="emptyDetail">需要通过网址打开游戏才能查看排行榜</div>'; return; }
-  const kind = rankKind;
-  if (!force && cache[kind] && Date.now() - cache[kind].at < 30000) { renderRank(cache[kind].data); return; }
-  if (loading) return;
-  loading = true;
-  list.innerHTML = '<div class="emptyDetail">加载中…</div>';
-  try {
-    const data = await fetchRank(kind);
-    cache[kind] = { at: Date.now(), data };
-    if (rankKind === kind) renderRank(data);
-  } catch (err) {
-    list.innerHTML = `<div class="emptyDetail">加载失败：${escapeHtml(err.message || err)}</div>`;
-  } finally { loading = false; }
-}
-
-function renderRank(data) {
-  const list = el('rankList'), me = el('rankMe'), note = el('rankNote');
-  const kind = rankKind;
-  note.textContent = kind === 'speedrun'
-    ? '从新游戏（或轮回）到首次击败第 100 层的游戏时间，按战斗回合计，不受速度倍率影响；同时间等级低者优先'
-    : '清过的最高无尽层，显示达成时刻与从新游戏（或轮回）起的用时；同层先达成者优先';
-  if (!data || !data.rows || !data.rows.length) {
-    list.innerHTML = `<div class="emptyDetail">${kind === 'speedrun' ? '还没有人通关，第一个上榜的会是你吗？' : '还没有人踏入无尽'}</div>`;
-    me.innerHTML = '';
-    return;
-  }
-  const myTail = (getCloudCode() || '').slice(-4);
-  list.innerHTML = data.rows.map(r => rowHtml(kind, r, data.me && r.rank === data.me.rank && r.tail === myTail)).join('');
-  if (data.me) me.innerHTML = `<div class="rankMeLabel">我的名次 · 共 ${data.total} 人</div>` + rowHtml(kind, data.me, true);
-  else me.innerHTML = `<div class="rankMeLabel">你还没有上榜${kind === 'speedrun' ? '：首次通关后自动上传' : '：清过无尽层后自动上传'}</div>`;
-}
-
-function initRank() {
-  const segs = el('rankSegs');
-  if (!segs) return;
-  segs.addEventListener('click', e => {
-    const b = e.target.closest('button[data-rank]');
-    if (!b) return;
-    rankKind = b.dataset.rank;
-    segs.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
-    loadRank(false);
-  });
-  el('btnRankRefresh').addEventListener('click', () => loadRank(true));
-  on('rankPushed', () => { cache = {}; });
-  /* 首次进入游戏拉一次（桌面端面板常驻） */
-  on('loaded', () => setTimeout(() => loadRank(false), 1200));
 }
 
 /* ===== src/view/goals.js ===== */
@@ -9457,56 +9201,9 @@ function enterGame(greeting) {
   bumpInv(); bumpSkill();
   renderLog();
   requestRender();
-  refreshCloudUi();
   startAutosave();
-  startCloudSync();
   save();
   maybeStartGuide();
-}
-
-/* ---------- 存档码弹窗 ---------- */
-function showCodeModal(code, title, confirmText, onConfirm, askId) {
-  el('codeModalTitle').textContent = title;
-  el('codeText').textContent = formatCode(code);
-  el('btnCodeConfirm').textContent = confirmText;
-  el('codeIdRow').style.display = askId ? '' : 'none';
-  if (askId) { el('codeIdInput').value = ''; el('codeIdInput').placeholder = `默认 ${defaultPlayerId(code)}`; }
-  el('codeModal').style.display = '';
-  el('btnCodeConfirm').onclick = () => {
-    if (askId) {
-      const v = el('codeIdInput').value.trim();
-      if (v && validatePlayerId(v)) { window.alert(validatePlayerId(v)); return; }
-      setPlayerId(v || defaultPlayerId(code), true);
-    }
-    el('codeModal').style.display = 'none'; onConfirm && onConfirm();
-  };
-}
-async function copyText(text, okMsg) {
-  try { await navigator.clipboard.writeText(text); toast(okMsg); }
-  catch (err) { window.prompt('请手动复制：', text); }
-}
-function refreshCloudUi() {
-  const code = getCloudCode();
-  el('uiCloudCode').textContent = formatCode(code);
-  el('uiPlayerId').textContent = state.playerId || defaultPlayerId(code);
-  if (!cloudAvailable()) el('uiCloudStatus').textContent = '云同步：需要通过网址打开游戏才可用';
-}
-on('cloudSynced', ({ at }) => { el('uiCloudStatus').innerHTML = `云同步：已上传 <b>${fmtTime(at)}</b>`; });
-on('cloudFailed', ({ error }) => { el('uiCloudStatus').textContent = `云同步：失败（${error}），本地存档不受影响`; });
-
-async function offerCloudIfNewer() {
-  const cloud = await checkCloudNewer();
-  if (!cloud) return;
-  const s = cloud.state;
-  if (window.confirm(`云端有更新的存档：Lv.${s.level} · 最高第 ${s.maxFloor} 层 · ${fmtTime(cloud.savedAt)} 保存。\n是否改用云端存档？（选「取消」则保留本机进度并覆盖云端）`)) {
-    applySave(cloud);
-    save();
-    syncSettingsToUi();
-    bumpInv(); bumpSkill(); renderLog(); requestRender();
-    toast('已切换到云端存档');
-  } else {
-    push();
-  }
 }
 
 function refreshTitleHint() {
@@ -9536,7 +9233,6 @@ function takeOverTab() {
     if (data) applySave(data);
     syncSettingsToUi();
     bumpInv(); bumpSkill(); renderLog(); requestRender();
-    refreshCloudUi();
     save();
     toast('已在本标签页继续游戏');
   } else refreshTitleHint();
@@ -9545,84 +9241,24 @@ function takeOverTab() {
 function bindSystem() {
   refreshTitleHint();
   el('btnTabTakeover').addEventListener('click', takeOverTab);
-  if (!cloudAvailable()) el('btnRestoreTitle').style.display = 'none';
 
   el('btnContinue').addEventListener('click', () => {
     const data = peek();
     if (!data) { toast('存档已不存在'); return; }
     applySave(data);
-    const start = () => {
-      enterGame('📂 已读取存档，欢迎回到裂隙。点击「开始战斗」继续深入。');
-      if (cloudAvailable()) offerCloudIfNewer();
-    };
-    /* 旧存档没有存档码：补发一个并提示截图 */
-    if (cloudAvailable() && !getCloudCode()) {
-      const code = ensureCode();
-      showCodeModal(code, '已为你的存档生成存档码', '我已截图，继续游戏', () => { start(); push(); });
-    } else start();
+    enterGame('📂 已读取存档，欢迎回到裂隙。点击「开始战斗」继续深入。');
   });
 
   el('btnEnterGame').addEventListener('click', () => {
     if (peek() && !window.confirm('已有存档，开始新游戏会覆盖它。确定继续？')) return;
     newGame();
-    if (cloudAvailable()) {
-      const code = generateCode();
-      setCloudCode(code);
-      showCodeModal(code, '你的存档码', '我已截图，开始游戏', () => {
-        enterGame('欢迎来到《无尽裂隙：刷宝者》。点击「开始战斗」进入裂隙。');
-        push();
-      }, true);
-    } else {
-      enterGame('欢迎来到《无尽裂隙：刷宝者》。点击「开始战斗」进入裂隙。');
-    }
+    enterGame('欢迎来到《无尽裂隙：刷宝者》。点击「开始战斗」进入裂隙。');
   });
-
-  const restoreFlow = async () => {
-    const input = window.prompt('输入 8 位存档码（例如 AB3D-EF7G）：');
-    if (!input) return;
-    try {
-      await restoreFromCode(input);
-      syncSettingsToUi();
-      bumpInv(); bumpSkill(); renderLog(); requestRender();
-      refreshCloudUi();
-      return true;
-    } catch (err) {
-      window.alert('恢复失败：' + err.message);
-      return false;
-    }
-  };
-  el('btnRestoreTitle').addEventListener('click', async () => {
-    if (await restoreFlow()) enterGame('☁️ 已从云端恢复存档，欢迎回来。');
-  });
-  el('btnRestoreCode').addEventListener('click', async () => {
-    if (!window.confirm('用存档码恢复会覆盖当前进度，确定？')) return;
-    if (await restoreFlow()) toast('已恢复云端存档');
-  });
-  el('btnCopyCode').addEventListener('click', () => {
-    const code = getCloudCode();
-    if (code) copyText(formatCode(code), '存档码已复制');
-  });
-  el('btnCopyCodeModal').addEventListener('click', () => copyText(el('codeText').textContent, '存档码已复制'));
-  el('btnCloudPush').addEventListener('click', async () => {
-    if (!cloudAvailable()) { toast('需要通过网址打开游戏才能云同步'); return; }
-    save();
-    toast((await push(true)) ? '已同步到云端' : '同步失败');
-  });
-
-  el('btnChangeId').addEventListener('click', () => {
-    const left = idChangesLeft();
-    if (left <= 0) { toast('今天的改名次数用完了'); return; }
-    const v = window.prompt(`输入新的游戏 ID（2～12 字，今天还可改 ${left} 次）：`, state.playerId || '');
-    if (v === null) return;
-    const err = setPlayerId(v, false);
-    if (err) window.alert(err); else { refreshCloudUi(); save(); toast('游戏 ID 已更新'); }
-  });
-  on('rankDirty', () => refreshCloudUi());
 
   el('btnSaveNow').addEventListener('click', () => { if (save()) toast('已保存'); });
 
   el('btnExport').addEventListener('click', async () => {
-    const str = exportString();
+    const str = await exportString();
     try {
       await navigator.clipboard.writeText(str);
       toast('存档字符串已复制到剪贴板');
@@ -9631,16 +9267,15 @@ function bindSystem() {
     }
   });
 
-  el('btnImport').addEventListener('click', () => {
+  el('btnImport').addEventListener('click', async () => {
     const str = window.prompt('粘贴存档字符串（将覆盖当前进度）：');
     if (!str) return;
     try {
-      importString(str);
+      await importString(str);
       syncSettingsToUi();
       bumpInv(); bumpSkill();
       renderLog();
       requestRender();
-      refreshCloudUi();
       toast('导入成功');
     } catch (err) {
       window.alert('导入失败：' + err.message);
@@ -9656,12 +9291,7 @@ function bindSystem() {
     renderLog();
     addLog('🧹 存档已重置，重新开始。', 'info');
     requestRender();
-    if (cloudAvailable()) {
-      const code = generateCode();
-      setCloudCode(code);
-      refreshCloudUi();
-      showCodeModal(code, '新的存档码', '我已截图，继续', () => { save(); push(); });
-    } else save();
+    save();
   });
 }
 
@@ -9680,7 +9310,6 @@ function init() {
   initHud(el('stageWrap'));
   initAudio();
   initEvents();
-  initRank();
   initGoalsView();
   initMapView();
   initTitleArt();
