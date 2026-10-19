@@ -318,8 +318,8 @@ window.addEventListener('error', function (e) {
           <div class="qChecks" id="autoSalvageQualities">
             <label class="qCheck" style="color:#d0d0d0"><input type="checkbox" data-q="common" checked>普通</label>
             <label class="qCheck" style="color:#4ade80"><input type="checkbox" data-q="fine">精良</label>
-            <label class="qCheck" style="color:#60a5fa"><input type="checkbox" data-q="rare" checked>稀有</label>
-            <label class="qCheck" style="color:#c084fc"><input type="checkbox" data-q="epic" checked>史诗</label>
+            <label class="qCheck" style="color:#60a5fa"><input type="checkbox" data-q="rare">稀有</label>
+            <label class="qCheck" style="color:#c084fc"><input type="checkbox" data-q="epic">史诗</label>
             <label class="qCheck" style="color:#fb923c"><input type="checkbox" data-q="legendary">传说</label>
             <label class="qCheck" style="color:#f87171"><input type="checkbox" data-q="mythic">神话</label>
           </div>
@@ -1573,7 +1573,7 @@ function createNewState() {
 
     autoSalvage: {
       enabled: false,
-      qualities: { common: true, fine: false, rare: true, epic: true, legendary: false, mythic: false },
+      qualities: { common: true, fine: false, rare: false, epic: false, legendary: false, mythic: false },
       maxTier: 0
     },
 
